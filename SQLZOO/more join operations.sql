@@ -74,6 +74,22 @@ WHERE name='Rock Hudson'
 GROUP BY yr
 HAVING COUNT(title) > 2
 
+--12.List the film title and the leading actor for all of the films 'Julie Andrews' played in.
+--解法1
+select m.title, a2.name
+from casting c1
+join actor a1 on c1.actorid = a1.id and a1.name = 'Julie Andrews' 
+join casting c2 on c1.movieid = c2.movieid and c2.ord = 1
+join actor a2 on c2.actorid = a2.id
+join movie m on c2.movieid = m.id
+group by m.title , a2.name
+--解法2
+select distinct m.title, a2.name
+from casting c1
+join actor a1 on c1.actorid = a1.id and a1.name = 'Julie Andrews' 
+join casting c2 on c1.movieid = c2.movieid and c2.ord = 1
+join actor a2 on c2.actorid = a2.id
+join movie m on c2.movieid = m.id
 
 
 --13.Obtain a list, in alphabetical order, of actors who've had at least 15 starring roles.
