@@ -39,4 +39,31 @@ FROM route a JOIN route b ON
 WHERE stopa.name='Craiglockhart' and stopb.name = 'London Road'
 
 
+--7.Give a list of all the services which connect stops 115 and 137 ('Haymarket' and 'Leith')
+--解法1
+select r1.company, r1.num
+from route r1
+join route r2 ON r1.num = r2.num
+where r1.stop = 115 and r2.stop = 137
+group by r1.company, r1.num
+--解法2
+select distinct r1.company, r1.num
+from route r1
+join route r2 ON r1.num = r2.num
+where r1.stop = 115 and r2.stop = 137
+
+--8.Give a list of the services which connect the stops 'Craiglockhart' and 'Tollcross'
+select r1.company, r1.num
+from route r1
+join route r2 ON r1.num = r2.num
+join stops s1 on r1.stop = s1.id 
+join stops s2 on r2.stop = s2.id 
+where s1.name = 'Craiglockhart' and s2.name = 'Tollcross'
+
+--9.Give a distinct list of the stops which may be reached from 'Craiglockhart' by taking one bus,
+--including 'Craiglockhart' itself, offered by the LRT company. Include the company and bus no.
+--of the relevant services.
+
+
+
 
