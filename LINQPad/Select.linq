@@ -10,6 +10,6 @@
 
 var query = from e in Employees
 			where e.Region == "WA"
-			select e;
+			select new{ID = e.EmployeeID, Region = e.Region};
 
 query.Dump();
